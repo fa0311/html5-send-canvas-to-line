@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Canvas to liff</title>
+<style>
+#canvas {
+  border:1px solid gray;
+}
+</style>
+</head>
+<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<script>
+window.onload = function (e) {
+        liff.init(function (data) {
+            initializeApp(data);
+        });
+    };
+
+    function speech(url) {
+        console.log(url);
+        liff.sendMessages([{
+            type: 'image',
+            originalContentUrl: url,
+            previewImageUrl: url
+        }]).then(function () {
+            window.alert("送信できました");
+        }).catch(function (error) {
+            window.alert("送信できませんでした: " + error);
+        });
+    }
+</script>
+<body>
+<canvas id="canvas" width="640px" height="480px">残念ながらHTML5に対応していません</canvas>
+<button style="width:100px;" onclick="save()">トークに送信する</button>
+<script>
+function save(){
+var can=canvas.toDataURL("image/png");
+can = can.replace("image/png", "image/octet-stream");
+const obj = {data: can};
+const method = "POST";
+const body = Object.keys(obj).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
+const headers = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+};
+fetch('draw_save.php',{method, headers, body})
+  .then((response) => response.text())
+  .then((text) => speech(text))
+  .catch((error) => speech(text));
+}
+</script>
+</body>
+</html>
