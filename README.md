@@ -1,6 +1,6 @@
 # html5-send-canvas-to-line
 html5のcanvasをliffを使ってlineに画像として送信するソースコードです<br>
-Canvasに描画する処理は自分たちで書いてください<br>
+Canvasに描画する処理は個人で書いてください<br>
 ### セット
 まずフォルダごとサーバーにアップロードします<br>
 /public_htmlに突っ込めばok<br>
