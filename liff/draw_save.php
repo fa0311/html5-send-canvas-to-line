@@ -12,7 +12,6 @@ if (file_exists($directory_path)) {
     mkdir($directory_path, 0777);
 }
 file_put_contents('draw/draw'.$output["num"].'.png', $data, LOCK_EX);
-unset($output[$num-300]);
 $output = json_encode($output, (JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 $output = file_put_contents('draw_system.json', $output, LOCK_EX);
 echo "https://"."domain"."/liff/draw/draw".$num.".png";
